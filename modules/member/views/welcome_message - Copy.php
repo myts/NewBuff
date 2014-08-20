@@ -1,9 +1,26 @@
+<?php require_once BASEPATH."../themes/".$myts['site_theme']."/lib/function.php";?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
-
+	<title><?php echo $template['title'];?></title>
+	<?php echo $template['metadata'];?>
+	
+    <link rel="icon" href="<?php echo $myts['site_favicon'];?>">
+	
+	<?php 
+	    $asset = new CMS_Asset();
+	    $asset->add_themes_css('style.css', $myts['site_theme'], 'default');
+	    $asset->add_themes_css('bootstrap.min.css', $myts['site_theme'], 'default');
+		$asset->add_themes_css('bootstrap-responsive.min.css', $myts['site_theme'], 'default');	
+	    echo $asset->compile_css();	    
+	    
+	    $asset->add_cms_js('myts/js/jquery.js');
+	    $asset->add_cms_js("bootstrap/js/bootstrap.min.js");
+	    $asset->add_themes_js('script.js', $myts['site_theme'], 'default');
+	    echo $asset->compile_js(TRUE);	    
+	?>
+	
 	<style type="text/css">
 
 	::selection{ background-color: #E13300; color: white; }
@@ -81,7 +98,7 @@
 		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
 	</div>
 
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
+	<p class="footer">Page rendered in <strong>{{ elapsed_time }}</strong> seconds</p>
 </div>
 
 </body>
